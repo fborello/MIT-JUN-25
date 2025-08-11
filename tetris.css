@@ -62,13 +62,21 @@ body {
 }
 
 .header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.score-container {
-    font-size: 1.2rem;
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.score-container, .level-container, .lines-container {
+    font-size: 1rem;
     font-weight: bold;
     background: rgba(255, 255, 255, 0.2);
     padding: 0.3rem 0.8rem;
@@ -76,55 +84,109 @@ body {
     display: inline-block;
 }
 
+.game-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    height: calc(95vh - 200px);
+}
+
 #gameCanvas {
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    background: #2c3e50;
+    background: #1a1a1a;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    margin: 0.5rem 0;
-    max-height: 60vh;
+    max-height: 100%;
     width: auto;
     height: auto;
 }
 
-.controls {
-    margin-top: 0.8rem;
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-width: 180px;
+    max-height: 100%;
+    overflow: hidden;
 }
 
-.controls p {
+.next-piece {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.next-piece h3 {
+    margin-bottom: 0.3rem;
     font-size: 0.9rem;
+}
+
+#nextCanvas {
+    background: #1a1a1a;
+    border-radius: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+.controls {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.controls h3 {
     margin-bottom: 0.5rem;
-    opacity: 0.9;
+    font-size: 0.9rem;
 }
 
-.arrow-keys {
-    display: inline-block;
-}
-
-.arrow-row {
+.control-item {
     display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.arrow-key {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    margin-bottom: 0.3rem;
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
 }
 
-.arrow-key:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+.key {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+}
+
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.game-buttons button {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.game-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.game-buttons button:active {
+    transform: translateY(0);
 }
 
 .game-over {
@@ -151,8 +213,8 @@ body {
 }
 
 .game-over p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 #restartBtn {
@@ -165,6 +227,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
 }
 
 #restartBtn:hover {
@@ -173,7 +236,7 @@ body {
 }
 
 /* Responsividade */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .game-container {
         padding: 1rem;
         margin: 1rem;
@@ -183,14 +246,33 @@ body {
         font-size: 2rem;
     }
     
-    #gameCanvas {
-        width: 300px;
-        height: 300px;
+    .game-info {
+        gap: 1rem;
     }
     
-    .arrow-key {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #gameCanvas {
+        width: 250px;
+        height: 500px;
+    }
+    
+    .side-panel {
+        min-width: 250px;
+    }
+    
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    
+    .control-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.3rem;
     }
 }

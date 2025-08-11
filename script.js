@@ -65,24 +65,28 @@ class SnakeGame {
     handleKeyPress(e) {
         switch(e.key) {
             case 'ArrowUp':
+                e.preventDefault();
                 if (this.dy !== 1) { // Não pode ir para baixo se estiver indo para cima
                     this.dx = 0;
                     this.dy = -1;
                 }
                 break;
             case 'ArrowDown':
+                e.preventDefault();
                 if (this.dy !== -1) { // Não pode ir para cima se estiver indo para baixo
                     this.dx = 0;
                     this.dy = 1;
                 }
                 break;
             case 'ArrowLeft':
+                e.preventDefault();
                 if (this.dx !== 1) { // Não pode ir para direita se estiver indo para esquerda
                     this.dx = -1;
                     this.dy = 0;
                 }
                 break;
             case 'ArrowRight':
+                e.preventDefault();
                 if (this.dx !== -1) { // Não pode ir para esquerda se estiver indo para direita
                     this.dx = 1;
                     this.dy = 0;

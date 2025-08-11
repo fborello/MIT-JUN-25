@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <link rel="stylesheet" href="tetris.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="header-top">
+                <button class="menu-btn" onclick="window.location.href='menu.html'">← Voltar ao Menu</button>
+                <h1>🧩 Tetris</h1>
+            </div>
+            <div class="game-info">
+                <div class="score-container">
+                    <span>Pontuação: </span>
+                    <span id="score">0</span>
+                </div>
+                <div class="level-container">
+                    <span>Nível: </span>
+                    <span id="level">1</span>
+                </div>
+                <div class="lines-container">
+                    <span>Linhas: </span>
+                    <span id="lines">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas" width="300" height="600"></canvas>
+            
+            <div class="side-panel">
+                <div class="next-piece">
+                    <h3>Próxima Peça</h3>
+                    <canvas id="nextCanvas" width="120" height="120"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <h3>Controles</h3>
+                    <div class="control-item">
+                        <span class="key">← →</span>
+                        <span>Mover</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↓</span>
+                        <span>Cair rápido</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">↑</span>
+                        <span>Rotacionar</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">Espaço</span>
+                        <span>Pausar</span>
+                    </div>
+                </div>
+                
+                <div class="game-buttons">
+                    <button id="startBtn">Iniciar</button>
+                    <button id="pauseBtn">Pausar</button>
+                    <button id="resetBtn">Reiniciar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Pontuação final: <span id="finalScore">0</span></p>
+            <p>Nível alcançado: <span id="finalLevel">1</span></p>
+            <p>Linhas completadas: <span id="finalLines">0</span></p>
+            <button id="restartBtn">Jogar Novamente</button>
+        </div>
+    </div>
+    
+    <script src="tetris.js"></script>
+</body>
+</html>
